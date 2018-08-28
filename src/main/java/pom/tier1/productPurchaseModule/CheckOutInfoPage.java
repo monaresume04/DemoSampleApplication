@@ -63,19 +63,19 @@ public class CheckOutInfoPage {
 	@FindBy(xpath = ".//input[starts-with(@class,'make_purchase')]")
 	public WebElement purchaseButton;
 	
-	public void setAppFieldsOfCheckOutPage(String FirstName, String LastName, String Address,
+	public void populateCheckoutfieldInfo(String FirstName, String LastName, String Address,
 			String city ,String state,String country ,String PostalCode ,String Phone ,String email){
 		
 		this.email.sendKeys(email);
-		this.phone.sendKeys(Phone);
-		this.postalCode.sendKeys(PostalCode);
+		this.firstName.sendKeys(FirstName);
+		this.lastName.sendKeys(LastName);
+		this.address.sendKeys(Address);
+		this.city.sendKeys(city);
+		this.undefined.sendKeys(state);
 		Select countrySelect =new Select(this.country);
 		countrySelect.selectByVisibleText(country);
-		this.undefined.sendKeys(state);
-		this.city.sendKeys(city);
-		this.address.sendKeys(Address);
-		this.lastName.sendKeys(LastName);
-		this.firstName.sendKeys(FirstName);
+		this.postalCode.sendKeys(PostalCode);
+		this.phone.sendKeys(Phone);
 		this.sameAsBillingAddressCheckBox.click();
 	}
 

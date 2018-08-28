@@ -14,8 +14,8 @@ public class TransactionResultPage {
 
 	}
 	
-	@FindBy(xpath=".//h1[contains(.,'Transaction Results')")
-	public WebElement transactionPage;
+	@FindBy(xpath=".//h1[contains(.,'Transaction Results')]")
+	public WebElement pageName;
 	@FindBy(xpath=".//div[contains(@class,'wpsc-transaction-results-wrap')]/p[1]")
 	public WebElement containofFirstPara;
 	@FindBy(xpath=".//div[contains(@class,'wpsc-transaction-results-wrap')]/p[2]")
