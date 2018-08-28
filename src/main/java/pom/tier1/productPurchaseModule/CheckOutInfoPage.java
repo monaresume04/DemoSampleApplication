@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CheckOutInfoPage {
 	WebDriver driver;
@@ -13,6 +14,9 @@ public class CheckOutInfoPage {
 		PageFactory.initElements(driver, this);
 
 	}
+	
+	@FindBy(xpath = ".//h1[contains(.,'Checkout')]")
+	public WebElement pageName;
 	
 	@FindBy(xpath = ".//input[contains(@title,'billingemail')]")
 	public WebElement email;
@@ -58,5 +62,21 @@ public class CheckOutInfoPage {
 
 	@FindBy(xpath = ".//input[starts-with(@class,'make_purchase')]")
 	public WebElement purchaseButton;
+	
+	public void setAppFieldsOfCheckOutPage(String FirstName, String LastName, String Address,
+			String city ,String state,String country ,String PostalCode ,String Phone ,String email){
+		
+		this.email.sendKeys(email);
+		this.phone.sendKeys(Phone);
+		this.postalCode.sendKeys(PostalCode);
+		Select countrySelect =new Select(this.country);
+		countrySelect.selectByVisibleText(country);
+		this.undefined.sendKeys(state);
+		this.city.sendKeys(city);
+		this.address.sendKeys(Address);
+		this.lastName.sendKeys(LastName);
+		this.firstName.sendKeys(FirstName);
+		this.sameAsBillingAddressCheckBox.click();
+	}
 
 }

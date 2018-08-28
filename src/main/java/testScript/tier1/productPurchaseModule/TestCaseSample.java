@@ -13,12 +13,12 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import coreModules.TestContext.TestContext;
 import coreModules.dataProvider.BaseDataProvider;
 import coreModules.reportProvider.ExtentManager;
 import pom.tier1.productPurchaseModule.AccessoriesSearchPage;
+import pom.tier1.productPurchaseModule.CheckOutInfoPage;
 import pom.tier1.productPurchaseModule.CheckOutInitalPage;
 import pom.tier1.productPurchaseModule.HomePage;
 import utility.Config;
@@ -61,7 +61,7 @@ public class TestCaseSample {
 	        extent.flush();
 	}
 	@Test(dataProvider ="testDataProvider", dataProviderClass = BaseDataProvider.class)
-	  public void test( String TestcaseName,String FirstName, String LastName) throws InterruptedException {
+	  public void test( String TestCaseName,String FirstName, String LastName, String Address,String city ,String state,String country ,String PostalCode ,String Phone ,String email) throws InterruptedException {
 		WebDriver webdriver=TestContext.get().getDriver();
 		 webdriver.get(Config.getString("environmentConfig.applicationloginLink"));
 		 webdriver.manage().window().maximize();
@@ -80,11 +80,11 @@ public class TestCaseSample {
 	    	  Assert.fail("Add button for magic mause does not exist");
 	      }
 	      accessoriesSearchPage.magicMouseAddToCardButton.click();
-	      
+	      Thread.sleep(1000);
 	      accessoriesSearchPage.checkOutButton.click();
 	      //validate check out page 
 	      CheckOutInitalPage checkoutInitailPage =new CheckOutInitalPage(webdriver);
-	      HelperClass.waitForElement(webdriver, checkoutInitailPage.checkoutPage,40);
+	      HelperClass.waitForElement(webdriver, checkoutInitailPage.checkoutPage,60);
 	      Assert.assertEquals(checkoutInitailPage.checkoutPage.getText(),"Checkout");
 	      //check how many rows (count = 1)
 	      Assert.assertEquals(checkoutInitailPage.numberOfRowsOfChecoutTable.size(),1 ,"More then one product in cart");
@@ -93,7 +93,15 @@ public class TestCaseSample {
 	      Assert.assertEquals(checkoutInitailPage.quantitiyNumber.getAttribute("value").toString(), new String("1") ,"Checkout Quantity is more equal to one");
 	      Assert.assertEquals(checkoutInitailPage.productprice.getText().toString(), new String("$150.00") ,"Checkout Quantity is more then one");
 	      Assert.assertEquals(checkoutInitailPage.totalprice.getText().toString(), new String("$150.00") ,"Checkout Quantity is more then one");
-	      
 	      checkoutInitailPage.continueButton.click();
+	      
+	      CheckOutInfoPage checkOutInfoPage =new CheckOutInfoPage(webdriver);
+	      HelperClass.waitForElement(webdriver, checkOutInfoPage.pageName,40);
+	      ((JavascriptExecutor)webdriver).executeScript("arguments[0].scrollIntoView();", checkOutInfoPage.email);
+	      HelperClass.waitForElement(webdriver, checkOutInfoPage.email,40);
+	      checkOutInfoPage.setAppFieldsOfCheckOutPage(FirstName,LastName,Address,city ,state,country , PostalCode ,Phone, email);
+	      checkOutInfoPage.purchaseButton.click();
+	      
+	      
 	  }
 }
