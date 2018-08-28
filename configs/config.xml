@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project name="SampleDemoProject">
+
+	<environment>
+		<configPath>./configs/environment/QA1.xml</configPath>
+	</environment>
+</Project>
+
+
