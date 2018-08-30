@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name = "Simple Reporter Suite">
+   <listeners>
+      <listener class-name = "coreModules.reportProvider.ExtentTestNGIReporterListener" />
+   </listeners>
+
+   <test name = "magic-mouse-purchase">
+      <classes>
+         <class name = "testScript.tier1.productPurchaseModule.TestCaseSample" />
+         
+      </classes>
+   </test>
+</suite>

@@ -56,7 +56,7 @@ public class ExtentTestNGIReporterListener implements IReporter {
         
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
-                test = extent.createTest(result.getMethod().getMethodName());
+                test = extent.createTest(result.getMethod().getXmlTest().getName());
                 
                 for (String group : result.getMethod().getGroups())
                     test.assignCategory(group);

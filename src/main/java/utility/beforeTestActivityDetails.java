@@ -2,21 +2,35 @@ package utility;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-
 import coreModules.TestContext.TestContext;
-import coreModules.reportProvider.ExtentManager;
 
 public class beforeTestActivityDetails {
 	
-	
+	@BeforeSuite(alwaysRun = true)
+	public void loadConfigFile() {
+		Config.getInstance(); // creating instance of Config file .
+
+	}
+
+	@BeforeTest(alwaysRun = true)
+	public synchronized void initDriver() {
+		TestContext.init(); // initialized testContext
+		// create chrome driver instance .
+		System.setProperty("webdriver.chrome.driver", "C:\\seleniumchromeDriver\\chromedriver.exe");
+		WebDriver webdriver = new ChromeDriver();
+		TestContext.get().setDriver(webdriver);
+	}
+
+	@AfterTest(alwaysRun = true)
+	public synchronized void afterTest() {
+		TestContext.get().getDriver().close();
+		TestContext.get().getDriver().quit();
+
+	}
 
 	
 }

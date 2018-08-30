@@ -14,7 +14,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentManager {
 	 private static ExtentReports extent;
-	    
+	 //   String fileName ="extent.html";
 	    public static ExtentReports getInstance() {
 	    	if (extent == null) {
 	    		File location = new File("logs/" + getLogFileName() +"/extent.html");

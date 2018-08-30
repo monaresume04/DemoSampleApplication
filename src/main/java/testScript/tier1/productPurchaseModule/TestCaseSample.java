@@ -20,30 +20,11 @@ import pom.tier1.productPurchaseModule.HomePage;
 import pom.tier1.productPurchaseModule.TransactionResultPage;
 import utility.Config;
 import utility.HelperClass;
+import utility.beforeTestActivityDetails;
 
-public class TestCaseSample {
+public class TestCaseSample extends beforeTestActivityDetails {
 
-	@BeforeSuite
-	public void loadConfigFile() {
-		Config.getInstance(); // creating instance of Config file .
 
-	}
-
-	@BeforeTest
-	public synchronized void initDriver() {
-		TestContext.init(); // initialized testContext
-		// create chrome driver instance .
-		System.setProperty("webdriver.chrome.driver", "C:\\seleniumchromeDriver\\chromedriver.exe");
-		WebDriver webdriver = new ChromeDriver();
-		TestContext.get().setDriver(webdriver);
-	}
-
-	@AfterTest
-	public synchronized void afterTest() {
-		TestContext.get().getDriver().close();
-		TestContext.get().getDriver().quit();
-
-	}
 
 	@Test(dataProvider = "testDataProvider", dataProviderClass = BaseDataProvider.class)
 	public void test(String TestCaseName, String FirstName, String LastName, String Address, String city, String state,
